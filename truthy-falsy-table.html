@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+    <style>
+    td.falsy {
+        color: #600;
+    }
+
+    td.truthy {
+        color: #060;
+    }
+    </style>
+</head>
+
+<body>
+	<br>
+    <div class="container">
+        <h2>Приведение значений к булевому типу</h2>
+
+
+
+
+
+        <br><br>
+        <table class="table" style="width: auto">
+            <thead id="tHead"></thead>
+            <tbody id="tBody"></tbody>
+        </table>
+    </div>
+    <script>
+    const values = [
+      '0', '""', 'NaN', 'nil/null/None/undef/\'()', '"0"', '-1', "[]", 'empty map/list/object'
+    ];
+    const langs = {
+      "JS": [0, 0, 0, 0, 1, 1, 1, 1],
+      "Perl": [0, 0, 1, 0, 0, 1, 1, 0],
+      "PHP": [0, 0, 1, 0, 0, 1, 0, 0],
+      "Python": [0, 0, 1, 0, 1, 1, 0, 0],
+      "Ruby": [1, 1, 1, 0, 1, 1, 1, 1],
+      "Lua": [1, 1, 1, 0, 1, 1, 1, 1],
+      "Scheme": [1, 1, 1, 1, 1, 1, 1, 1],
+    };
+
+
+    tHead.innerHTML = `<tr><th>Values</th>${Object.keys(langs).map(l => `<th>${l}</th>`).join('')}</tr>`;
+    const getVals = valIdx => Object.values(langs).map(l => {
+      const word = l[valIdx] === 0 ? 'falsy' : 'truthy';
+      return `<td class="${word}">${word}</td>`
+    }).join('');
+    tBody.innerHTML = `
+    	<tr>
+    	${values.map((v, i) => `<tr><th>${v}</th>${getVals(i)}`).join('')}
+    	</tr>
+    `
+    </script>
+</body>
+
+</html>
